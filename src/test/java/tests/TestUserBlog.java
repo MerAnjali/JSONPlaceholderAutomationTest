@@ -2,10 +2,13 @@ package tests;
 
 import org.testng.annotations.Test;
 import org.testng.annotations.Parameters;
+import io.restassured.response.Response;
 import components.UserComponent;
 import components.PostsComponent;
+import components.CommentsComponent;
 import models.User;
 import models.Posts;
+import models.Comments;
 
 import org.junit.Assert;
 import java.util.Arrays;
@@ -17,6 +20,8 @@ public class TestUserBlog {
 
     private int userId;
     private List<Posts> allPostsByUser;
+    private List<Comments> allCommentsOnUserPosts;
+    private Response allCommentsOnUserPostsResponse;
 
     @Test
     public void verifyGetAllUsers() {
@@ -41,5 +46,19 @@ public class TestUserBlog {
     public void verifyGetPostsByUserId() {
         allPostsByUser = Arrays.asList(PostsComponent.getPosts(userId).getBody().as(Posts[].class));
         allPostsByUser.forEach(post -> Assert.assertEquals(post.getUserId(), userId));
+    }
+
+    @Test(dependsOnMethods = "verifyGetPostsByUserId")
+    public void verifyPostComments() {
+        allPostsByUser.forEach(post -> {
+            System.out.println("here for the username " + allPostsByUser.toString());
+            int postId = post.getId();
+            allCommentsOnUserPostsResponse = CommentsComponent.getCommentsOnPost(postId);
+            allCommentsOnUserPosts = Arrays.asList(allCommentsOnUserPostsResponse.getBody().as(Comments[].class));
+            String emailRegex = "^(\\D)+(\\w)*((\\.(\\w)+)?)+@(\\D)+(\\w)*((\\.(\\D)+(\\w)*)+)?(\\.)[a-z]{2,}$";
+            allCommentsOnUserPosts.forEach(comment -> {
+                Assert.assertTrue(comment.getEmail().matches(emailRegex));
+            });
+        });
     }
 }

@@ -5,10 +5,12 @@
         <listener class-name="common.TestListener"/>
     </listeners>
     <test verbose="2" preserve-order="true" name="JSONPlaceholderAutomationTest">
+        <parameter name="userName" value="Samantha" />
         <classes>
             <class name="tests.TestUserBlog">
                 <methods>
                     <include name="verifyGetAllUsers" />
+                    <include name="verifyGetUser" />
                 </methods>
             </class>
         </classes>

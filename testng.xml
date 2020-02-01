@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="UserBlog Test Suite">
+    <listeners>
+        <listener class-name="common.TestListener"/>
+    </listeners>
     <test verbose="2" preserve-order="true" name="JSONPlaceholderAutomationTest">
         <classes>
-            <class name="TestUserBlog">
+            <class name="tests.TestUserBlog">
                 <methods>
-                    <include name="test_method1" />
+                    <include name="verifyGetAllUsers" />
                 </methods>
             </class>
         </classes>

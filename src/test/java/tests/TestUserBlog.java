@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.equalTo;
 
 public class TestUserBlog {
 
@@ -60,5 +61,34 @@ public class TestUserBlog {
                 Assert.assertTrue(comment.getEmail().matches(emailRegex));
             });
         });
+    }
+
+    @Test(dependsOnMethods = {"verifyGetUser"})
+    @Parameters({"postTitle", "postBody"})
+    public void verifyCreatePost(String postTitle, String postBody) {
+        PostsComponent.createPost(postTitle, postBody, userId)
+                .then()
+                .assertThat()
+                .body("title", equalTo(postTitle))
+                .body("body", equalTo(postBody))
+                .body("userId", equalTo(userId));
+    }
+
+    @Test(dependsOnMethods = {"verifyGetUser"})
+    @Parameters({"updatedPostTitle", "fakePostId"})
+    public void verifyUpdatePost(String updatedPostTitle, String postId) {
+        PostsComponent.updatePost("title", updatedPostTitle, postId)
+                .then()
+                .assertThat()
+                .body("title", equalTo(updatedPostTitle));
+    }
+
+    @Test(dependsOnMethods = {"verifyGetUser"})
+    @Parameters({"fakePostId"})
+    public void verifyDeletePost(String postId) {
+        PostsComponent.deletePost(postId)
+                .then()
+                .assertThat()
+                .body(equalTo("{}"));
     }
 }

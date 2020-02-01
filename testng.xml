@@ -11,6 +11,7 @@
                 <methods>
                     <include name="verifyGetAllUsers" />
                     <include name="verifyGetUser" />
+                    <include name="verifyGetPostsByUserId" />
                 </methods>
             </class>
         </classes>

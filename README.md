@@ -9,4 +9,4 @@ This project includes tests for APIs hosted in "https://jsonplaceholder.typicode
 4. Rest-Assured
 
 **Command to run the tests**
-> mvn clean compile test
+> mvn clean compile integration-test

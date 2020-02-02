@@ -1,5 +1,8 @@
 package config;
 
+import common.MyLogger;
+import org.apache.logging.log4j.Logger;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,6 +18,7 @@ public class configProvider {
     public static String ENDPOINT_ALBUMS;
     public static String ENDPOINT_PHOTOS;
     public static String ENDPOINT_TODOS;
+    private Logger log = MyLogger.log;
 
     public configProvider() {
         String configFilePath = "config.properties";
@@ -29,7 +33,7 @@ public class configProvider {
             configProvider.ENDPOINT_TODOS = props.getProperty("ENDPOINT_TODOS");
 
         } catch (IOException exc) {
-            System.out.println("Could not read configuration file");
+            log.info("Could not read configuration file");
         }
     }
 
@@ -43,7 +47,7 @@ public class configProvider {
                 throw new FileNotFoundException("property file '" + configFilePath + "' not found in the classpath");
             }
         } catch (Exception e) {
-            System.out.println("Exception: " + e);
+            log.error("Exception: " + e);
         } finally {
             iStream.close();
         }

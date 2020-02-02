@@ -1,19 +1,19 @@
 package tests;
 
 import common.MyLogger;
-import org.apache.logging.log4j.Logger;
 import components.*;
-import models.*;
-import org.testng.annotations.Test;
-import org.testng.annotations.Parameters;
 import io.restassured.response.Response;
-
+import models.*;
+import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+
 import java.util.Arrays;
 import java.util.List;
 
-import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.greaterThan;
 
 public class TestUserBlog {
 
@@ -36,7 +36,7 @@ public class TestUserBlog {
                 .body("size()", greaterThan(0));
     }
 
-    @Test
+    @Test(dependsOnMethods = "verifyGetAllUsers")
     @Parameters({"userName"}) // userName fetched from testng.xml
     public void verifyGetUser(String userName) {
         List<User> users = Arrays.asList(UserComponent.getUser(userName).getBody().as(User[].class));
@@ -105,7 +105,7 @@ public class TestUserBlog {
     @Test(dependsOnMethods = "verifyGetAlbumsByUserId")
     public void verifyGetPhotosByAlbumId() {
         allAlbumsByUser.forEach(album -> {
-            System.out.println("here for the albumId " + allAlbumsByUser.toString());
+            log.info("here for the albumId " + allAlbumsByUser.toString());
             int albumId = album.getId();
             allPhotosOnUserAlbumsResponse = PhotosComponent.getPhotosOnAlbum(albumId);
             allPhotosOnUserAlbums = Arrays.asList(allPhotosOnUserAlbumsResponse.getBody().as(Photos[].class));

@@ -5,27 +5,27 @@
         <listener class-name="common.TestListener"/>
     </listeners>
     <test verbose="2" preserve-order="true" name="JSONPlaceholderAutomationTest">
-        <parameter name="userName" value="Samantha" />
-        <parameter name="postTitle" value="This is a valid post title" />
-        <parameter name="postBody" value="This is a valid post body" />
-        <parameter name="updatedPostTitle" value="Updated valid post title" />
-        <parameter name="fakePostId" value="1" />
+        <parameter name="userName" value="Samantha"/>
+        <parameter name="postTitle" value="This is a valid post title"/>
+        <parameter name="postBody" value="This is a valid post body"/>
+        <parameter name="updatedPostTitle" value="Updated valid post title"/>
+        <parameter name="fakePostId" value="1"/>
         <parameter name="invalidUserName" value="invalidusername"/>
         <parameter name="invalidUserId" value="11111"/>
         <parameter name="invalidPostId" value="22222"/>
         <classes>
             <class name="tests.TestUserBlog">
                 <methods>
-                    <include name="verifyGetAllUsers" />
-                    <include name="verifyGetUser" />
-                    <include name="verifyGetPostsByUserId" />
-                    <include name="verifyPostComments" />
-                    <include name="verifyCreatePost" />
-                    <include name="verifyUpdatePost" />
-                    <include name="verifyDeletePost" />
-                    <include name="verifyGetAlbumsByUserId" />
-                    <include name="verifyGetPhotosByAlbumId" />
-                    <include name="verifyGetTodosByUserId" />
+                    <include name="verifyGetAllUsers"/>
+                    <include name="verifyGetUser"/>
+                    <include name="verifyGetPostsByUserId"/>
+                    <include name="verifyPostComments"/>
+                    <include name="verifyCreatePost"/>
+                    <include name="verifyUpdatePost"/>
+                    <include name="verifyDeletePost"/>
+                    <include name="verifyGetAlbumsByUserId"/>
+                    <include name="verifyGetPhotosByAlbumId"/>
+                    <include name="verifyGetTodosByUserId"/>
                 </methods>
             </class>
             <class name="tests.TestUserBlogNegativeScenarios">

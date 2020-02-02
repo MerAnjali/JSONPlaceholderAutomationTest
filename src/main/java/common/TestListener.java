@@ -2,8 +2,8 @@ package common;
 
 import config.configProvider;
 import io.restassured.RestAssured;
-import org.testng.*;
 import org.apache.logging.log4j.Logger;
+import org.testng.*;
 
 public class TestListener implements ISuiteListener, ITestListener {
 

@@ -1,10 +1,10 @@
 package components;
 
 import common.Spec;
+import config.configProvider;
 import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;
-import config.configProvider;
 
 public class UserComponent { // each method in a component would return a REST-assured Response object
 

@@ -23,6 +23,9 @@
                     <include name="verifyCreatePost" />
                     <include name="verifyUpdatePost" />
                     <include name="verifyDeletePost" />
+                    <include name="verifyGetAlbumsByUserId" />
+                    <include name="verifyGetPhotosByAlbumId" />
+                    <include name="verifyGetTodosByUserId" />
                 </methods>
             </class>
             <class name="tests.TestUserBlogNegativeScenarios">

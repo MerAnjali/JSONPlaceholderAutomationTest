@@ -1,14 +1,10 @@
 package tests;
 
+import components.*;
+import models.*;
 import org.testng.annotations.Test;
 import org.testng.annotations.Parameters;
 import io.restassured.response.Response;
-import components.UserComponent;
-import components.PostsComponent;
-import components.CommentsComponent;
-import models.User;
-import models.Posts;
-import models.Comments;
 
 import org.junit.Assert;
 import java.util.Arrays;
@@ -23,6 +19,11 @@ public class TestUserBlog {
     private List<Posts> allPostsByUser;
     private List<Comments> allCommentsOnUserPosts;
     private Response allCommentsOnUserPostsResponse;
+    private List<Albums> allAlbumsByUser;
+    private Response allPhotosOnUserAlbumsResponse;
+    private List<Photos> allPhotosOnUserAlbums;
+    private List<Todos> allTodosByUser;
+
 
     @Test
     public void verifyGetAllUsers() {
@@ -90,5 +91,30 @@ public class TestUserBlog {
                 .then()
                 .assertThat()
                 .body(equalTo("{}"));
+    }
+
+    @Test(dependsOnMethods = "verifyGetUser")
+    public void verifyGetAlbumsByUserId() {
+        allAlbumsByUser = Arrays.asList(AlbumsComponent.getAlbums(userId).getBody().as(Albums[].class));
+        allAlbumsByUser.forEach(album -> Assert.assertEquals(album.getUserId(), userId));
+    }
+
+    @Test(dependsOnMethods = "verifyGetAlbumsByUserId")
+    public void verifyGetPhotosByAlbumId() {
+        allAlbumsByUser.forEach(album -> {
+            System.out.println("here for the albumId " + allAlbumsByUser.toString());
+            int albumId = album.getId();
+            allPhotosOnUserAlbumsResponse = PhotosComponent.getPhotosOnAlbum(albumId);
+            allPhotosOnUserAlbums = Arrays.asList(allPhotosOnUserAlbumsResponse.getBody().as(Photos[].class));
+            allPhotosOnUserAlbums.forEach(photo -> {
+                Assert.assertEquals(photo.getAlbumId(), albumId);
+            });
+        });
+    }
+
+    @Test(dependsOnMethods = "verifyGetUser")
+    public void verifyGetTodosByUserId() {
+        allTodosByUser = Arrays.asList(TodosComponent.getTodosStatus(userId).getBody().as(Todos[].class));
+        allTodosByUser.forEach(todos -> Assert.assertEquals(todos.getUserId(), userId));
     }
 }

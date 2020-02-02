@@ -4,7 +4,7 @@
     <listeners>
         <listener class-name="common.TestListener"/>
     </listeners>
-    <test verbose="2" preserve-order="true" name="JSONPlaceholderAutomationTest">
+    <test verbose="2" name="JSONPlaceholderAutomationTest">
         <parameter name="userName" value="Samantha"/>
         <parameter name="postTitle" value="This is a valid post title"/>
         <parameter name="postBody" value="This is a valid post body"/>

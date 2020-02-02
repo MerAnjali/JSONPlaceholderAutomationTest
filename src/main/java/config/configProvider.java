@@ -18,7 +18,7 @@ public class configProvider {
     public static String ENDPOINT_ALBUMS;
     public static String ENDPOINT_PHOTOS;
     public static String ENDPOINT_TODOS;
-    private Logger log = MyLogger.log;
+    private final Logger log = MyLogger.log;
 
     public configProvider() {
         String configFilePath = "config.properties";

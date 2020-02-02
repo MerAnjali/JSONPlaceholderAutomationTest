@@ -14,9 +14,9 @@ import static org.hamcrest.Matchers.is;
 public class Spec {
     public static RequestSpecification requestSpec;
     public static ResponseSpecification successResponseSpec;
-    private final Logger log = MyLogger.log;
 
     public Spec() {
+        Logger log = MyLogger.log;
         log.info("Initializing request and response specifications");
         Spec.requestSpec = new RequestSpecBuilder()
                 .setBaseUri(configProvider.BASE_URL)

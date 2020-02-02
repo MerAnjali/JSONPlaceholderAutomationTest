@@ -2,9 +2,6 @@ package models;
 
 import com.fasterxml.jackson.annotation.*;
 
-import java.util.HashMap;
-import java.util.Map;
-
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
         "street",
@@ -25,8 +22,6 @@ public class Address { // POJO class to describes a user's address
     private String zipcode;
     @JsonProperty("geo")
     private Geo geo;
-    @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     @JsonProperty("street")
     public String getStreet() {
@@ -76,16 +71,6 @@ public class Address { // POJO class to describes a user's address
     @JsonProperty("geo")
     public void setGeo(Geo geo) {
         this.geo = geo;
-    }
-
-    @JsonAnyGetter
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    @JsonAnySetter
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
     }
 
 }

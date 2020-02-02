@@ -2,9 +2,6 @@ package models;
 
 import com.fasterxml.jackson.annotation.*;
 
-import java.util.HashMap;
-import java.util.Map;
-
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
         "name",
@@ -19,8 +16,6 @@ public class Company { // POJO class to describes a user's company
     private String catchPhrase;
     @JsonProperty("bs")
     private String bs;
-    @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     @JsonProperty("name")
     public String getName() {
@@ -51,15 +46,4 @@ public class Company { // POJO class to describes a user's company
     public void setBs(String bs) {
         this.bs = bs;
     }
-
-    @JsonAnyGetter
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    @JsonAnySetter
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
-
 }

@@ -1,5 +1,6 @@
 package common;
 
+import config.configProvider;
 import io.restassured.RestAssured;
 import org.testng.*;
 
@@ -8,8 +9,8 @@ public class TestListener implements ISuiteListener, ITestListener {
 
     public void onStart(ISuite iSuite) {
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
+        new configProvider();
         new Spec();
-
     }
 
     public void onFinish(ISuite iSuite) {

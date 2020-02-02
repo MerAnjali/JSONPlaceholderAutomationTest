@@ -1,6 +1,7 @@
 package components;
 
 import common.Spec;
+import config.configProvider;
 import io.restassured.response.Response;
 import org.json.simple.JSONObject;
 
@@ -12,7 +13,7 @@ public class PostsComponent { // each method in a component would return a REST-
         Response allPostsResponse = given()
                 .spec(Spec.requestSpec)
                 .param("userId", userId)
-                .get("posts");
+                .get(configProvider.ENDPOINT_POSTS);
         allPostsResponse
                 .then()
                 .assertThat()
@@ -23,7 +24,7 @@ public class PostsComponent { // each method in a component would return a REST-
     public static Response getPosts() {
         Response allPostsResponse = given()
                 .spec(Spec.requestSpec)
-                .get("posts");
+                .get(configProvider.ENDPOINT_POSTS);
         allPostsResponse
                 .then()
                 .assertThat()
@@ -49,7 +50,7 @@ public class PostsComponent { // each method in a component would return a REST-
         Response createPostResponse = given()
                 .spec(Spec.requestSpec)
                 .body(getCreatePostPayload(postTitle, postBody, userId))
-                .post("posts");
+                .post(configProvider.ENDPOINT_POSTS);
         createPostResponse
                 .then()
                 .assertThat()
@@ -61,7 +62,7 @@ public class PostsComponent { // each method in a component would return a REST-
         Response updatePostResponse = given()
                 .spec(Spec.requestSpec)
                 .body(getUpdatePostPayload(updateAttributeKey, updateAttributeValue))
-                .put("posts" + "/" + postId);
+                .put(configProvider.ENDPOINT_POSTS + "/" + postId);
         updatePostResponse
                 .then()
                 .assertThat()
@@ -72,7 +73,7 @@ public class PostsComponent { // each method in a component would return a REST-
     public static Response deletePost(String postId) {
         Response deletePostResponse = given()
                 .spec(Spec.requestSpec)
-                .delete("posts" + "/" + postId);
+                .delete(configProvider.ENDPOINT_POSTS + "/" + postId);
         deletePostResponse
                 .then()
                 .assertThat()

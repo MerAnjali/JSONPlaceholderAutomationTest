@@ -1,8 +1,8 @@
 package components;
 
 import common.Spec;
+import config.configProvider;
 import io.restassured.response.Response;
-import org.json.simple.JSONObject;
 
 import static io.restassured.RestAssured.given;
 
@@ -12,7 +12,7 @@ public class AlbumsComponent { // each method in a component would return a REST
         Response allAlbumsResponse = given()
                 .spec(Spec.requestSpec)
                 .param("userId", userId)
-                .get("albums");
+                .get(configProvider.ENDPOINT_ALBUMS);
         allAlbumsResponse
                 .then()
                 .assertThat()
@@ -23,7 +23,7 @@ public class AlbumsComponent { // each method in a component would return a REST
     public static Response getPosts() {
         Response allAlbumsResponse = given()
                 .spec(Spec.requestSpec)
-                .get("albums");
+                .get(configProvider.ENDPOINT_ALBUMS);
         allAlbumsResponse
                 .then()
                 .assertThat()

@@ -4,13 +4,14 @@ import common.Spec;
 import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;
+import config.configProvider;
 
 public class UserComponent { // each method in a component would return a REST-assured Response object
 
     public static Response getAllUsers() {
         Response allUsersResponse = given()
                 .spec(Spec.requestSpec)
-                .get("users");
+                .get(configProvider.ENDPOINT_USERS);
         allUsersResponse
                 .then()
                 .assertThat()
@@ -22,7 +23,7 @@ public class UserComponent { // each method in a component would return a REST-a
         Response allUsersResponse = given()
                 .spec(Spec.requestSpec)
                 .param("username", username)
-                .get("users");
+                .get(configProvider.ENDPOINT_USERS);
         allUsersResponse
                 .then()
                 .assertThat()

@@ -1,6 +1,7 @@
 package components;
 
 import common.Spec;
+import config.configProvider;
 import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;
@@ -11,7 +12,7 @@ public class PhotosComponent { // each method in a component would return a REST
         Response allPhotosOnAlbumResponse = given()
                 .spec(Spec.requestSpec)
                 .param("albumId", albumId)
-                .get("photos");
+                .get(configProvider.ENDPOINT_PHOTOS);
         allPhotosOnAlbumResponse
                 .then()
                 .assertThat()

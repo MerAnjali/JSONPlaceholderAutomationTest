@@ -1,6 +1,7 @@
 package components;
 
 import common.Spec;
+import config.configProvider;
 import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;
@@ -11,7 +12,7 @@ public class CommentsComponent { // each method in a component would return a RE
         Response allCommentsOnPostResponse = given()
                 .spec(Spec.requestSpec)
                 .param("postId", postId)
-                .get("comments");
+                .get(configProvider.ENDPOINT_COMMENTS);
         allCommentsOnPostResponse
                 .then()
                 .assertThat()

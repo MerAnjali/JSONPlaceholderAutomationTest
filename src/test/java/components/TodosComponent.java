@@ -1,6 +1,7 @@
 package components;
 
 import common.Spec;
+import config.configProvider;
 import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;
@@ -11,7 +12,7 @@ public class TodosComponent { // each method in a component would return a REST-
         Response allTodosResponse = given()
                 .spec(Spec.requestSpec)
                 .param("userId", userId)
-                .get("todos");
+                .get(configProvider.ENDPOINT_TODOS);
         allTodosResponse
                 .then()
                 .assertThat()
@@ -22,7 +23,7 @@ public class TodosComponent { // each method in a component would return a REST-
     public static Response getTodosStatus() {
         Response allTodosResponse = given()
                 .spec(Spec.requestSpec)
-                .get("todos");
+                .get(configProvider.ENDPOINT_TODOS);
         allTodosResponse
                 .then()
                 .assertThat()

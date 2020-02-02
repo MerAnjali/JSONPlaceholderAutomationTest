@@ -1,5 +1,6 @@
 package common;
 
+import config.configProvider;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.specification.RequestSpecification;
@@ -15,7 +16,7 @@ public class Spec {
     public Spec() {
         System.out.println("Initializing request and response specifications");
         Spec.requestSpec = new RequestSpecBuilder()
-                .setBaseUri("https://jsonplaceholder.typicode.com/")
+                .setBaseUri(configProvider.BASE_URL)
                 .addHeader("Content-Type", "application/json")
                 .build();
         Spec.successResponseSpec = new ResponseSpecBuilder()

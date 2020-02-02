@@ -1,5 +1,7 @@
 package tests;
 
+import common.MyLogger;
+import org.apache.logging.log4j.Logger;
 import components.*;
 import models.*;
 import org.testng.annotations.Test;
@@ -23,6 +25,7 @@ public class TestUserBlog {
     private Response allPhotosOnUserAlbumsResponse;
     private List<Photos> allPhotosOnUserAlbums;
     private List<Todos> allTodosByUser;
+    private Logger log = MyLogger.log;
 
 
     @Test
@@ -39,7 +42,7 @@ public class TestUserBlog {
         List<User> users = Arrays.asList(UserComponent.getUser(userName).getBody().as(User[].class));
         if (users.size() > 0) {
             userId = users.get(0).getId();
-            System.out.println("userId for the username " + userName + " = " + userId);
+            log.info("userId for the username " + userName + " = " + userId);
         } else
             Assert.fail("No user found with username = " + userName);
     }
@@ -53,7 +56,7 @@ public class TestUserBlog {
     @Test(dependsOnMethods = "verifyGetPostsByUserId")
     public void verifyPostComments() {
         allPostsByUser.forEach(post -> {
-            System.out.println("here for the username " + allPostsByUser.toString());
+            log.info("here for the username " + allPostsByUser.toString());
             int postId = post.getId();
             allCommentsOnUserPostsResponse = CommentsComponent.getCommentsOnPost(postId);
             allCommentsOnUserPosts = Arrays.asList(allCommentsOnUserPostsResponse.getBody().as(Comments[].class));
